@@ -26,6 +26,23 @@ numbers.forEach(function(button) {
             storedNumber = 0;
             storedIsResult = false;
         }
+        console.log("start")
+        console.log(displayValue)
+        console.log(storedNumber)
+        console.log(storedOperator)
+        console.log(storedIsResult)
+
+        //Checks if there is already a dot on the number
+        if (button.value == ".") {
+            if (displayValue.search('\\.') !== -1) {
+                console.log("dot")
+                console.log(displayValue)
+                console.log(storedNumber)
+                console.log(storedOperator)
+                console.log(storedIsResult)
+                return;
+            }
+        }
 
         //Avoids numbers overflowing the screen
         if (displayValue.length >= 10) {
@@ -128,9 +145,7 @@ function operate(a, b, operator) {
 //Equal
 function showResult() {
     result = operate(storedNumber, Number(displayValue), storedOperator);
-
     result = roundNumber(result);
-
     screen.textContent = result;
 
     //Initializes the stored number if the result is an error
