@@ -1,25 +1,38 @@
 //BUTTONS
 //Delete
-btnAllClear = document.querySelector("#all-clear");
-btnClear = document.querySelector("#clear");
+const btnAllClear = document.querySelector("#all-clear");
+const btnClear = document.querySelector("#clear");
 //Operators
-btnSum = document.querySelector("#sum");
-btnSubtract = document.querySelector("#subtract");
-btnMultiply = document.querySelector("#multiply");
-btnDivide = document.querySelector("#divide");
-btnEqual = document.querySelector("#equal");
+const operators = document.querySelectorAll(".operator");
+const btnEqual = document.querySelector("#equal");
 //Numbers
-btnOne = document.querySelector("#one");
-btnTwo = document.querySelector("#two");
-btnThree = document.querySelector("#three");
-btnFour = document.querySelector("#four");
-btnFive = document.querySelector("#five");
-btnSix = document.querySelector("#six");
-btnSeven = document.querySelector("#seven");
-btnEigth = document.querySelector("#eight");
-btnNine = document.querySelector("#nine");
-btnZero = document.querySelector("#zero");
-btnDot = document.querySelector("#dot");
+const numbers = document.querySelectorAll(".number");
+
+//VARIABLES
+const screen = document.querySelector(".screen");
+let displayValue = "";
+let storedNumber = 0;
+let storedOperator = "";
+
+//EVENT LISTENER
+numbers.forEach(function(button) {
+    button.addEventListener("click", function(){
+        displayValue = displayValue + button.value;
+        screen.textContent = displayValue;
+        console.log(displayValue);
+    });
+})
+
+operators.forEach(function(button) {
+    button.addEventListener("click", function() {
+        storedNumber = Number(displayValue);
+        displayValue = "";
+        console.log(storedNumber);
+        console.log(displayValue);
+        storedOperator = button.value;
+        console.log(storedOperator);
+    })
+})
 
 
 //FUNCTIONS

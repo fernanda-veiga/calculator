@@ -17,8 +17,8 @@ body {
 }
 
 .calculator {
-    height: 650px;
-    width: 400px;
+    min-height: 650px;
+    min-width: 400px;
     background: linear-gradient(
         to left bottom,
         rgba(255, 255, 255, 0.7),
@@ -53,10 +53,11 @@ body {
 
 }
 
-.button {
+.button, .number, .operator {
     background-color: #8093F1;
     border: none;
     border-radius: 50%;
+    transition: 0.3s;
     /*box-shadow: -2px -2px 8px rgba(255, 255, 255, 0.5), 2px 2px 8px rgba(0, 0, 0, 0.5);*/
     outline: none;
     cursor: pointer;
@@ -66,7 +67,7 @@ body {
     font-size: 30px;
 }
 
-.button:hover {
+.button:hover, .number:hover, .operator:hover {
     background-color: hsl(0, 0%, 30%);
     color: white;
 }
@@ -91,11 +92,12 @@ body {
     color: white;
 }
 
-#divide, #multiply, #subtract, #sum, #equal {
+.operator, #equal {
     background-color: #72DDF7;
+    transition: 0.3s;
 }
 
-#divide:hover, #multiply:hover, #subtract:hover, #sum:hover, #equal:hover {
+.operator:hover, #equal:hover {
     background-color: hsl(0, 0%, 30%);
     color: white;
 }
