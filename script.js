@@ -40,22 +40,26 @@ operators.forEach(function(button) {
     button.addEventListener("click", function() {
         if (storedNumber == 0) {
             storedNumber = Number(displayValue);
-            displayValue = "";
-            storedOperator = button.value;
         }
         else {
             showResult();
-            displayValue = "";
-            storedOperator = button.value;
-        } 
+        }
+        displayValue = "";
+        storedOperator = button.value; 
     })
 })
 
 //Equal button
 equal.addEventListener("click", function() {
+    //Checks if all calculation variables exist before using the equal button
+    if(storedNumber == 0 || storedOperator == "" || displayValue == "") {
+        return;
+    }
+
     showResult();
     displayValue = "";
     storedOperator = "";
+    return;
 })
 
 
