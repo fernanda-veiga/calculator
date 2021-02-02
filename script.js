@@ -18,13 +18,20 @@ let storedOperator = "";
 //Number buttons
 numbers.forEach(function(button) {
     button.addEventListener("click", function(){
-        if (displayValue == "0") {
-            displayValue = button.value;
+        //Avoids numbers overflowing the screen
+        if (displayValue.length >= 10) {
+            screen.textContent = displayValue;
         }
         else {
-            displayValue = displayValue + button.value;
+            //Avoids zeros in the beginning of numbers
+            if (displayValue == "0") {
+                displayValue = button.value;
+            }
+            else {
+                displayValue = displayValue + button.value;
+            }
+            screen.textContent = displayValue;
         }
-        screen.textContent = displayValue;
     });
 })
 
