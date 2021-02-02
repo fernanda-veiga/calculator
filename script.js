@@ -84,10 +84,16 @@ function showResult() {
         storedNumber = 0;
     }
     else {
-        result = roundNumber(result);
+        if (result > 9999999999) {
+            result = result.toExponential(2);
+        }
+        else {
+            result = roundNumber(result);
+        }
         storedNumber = result;
     }
     screen.textContent = result;
+    storedOperator = "";
     return;
 }
 
@@ -148,7 +154,13 @@ function getOperator(operator) {
     storedIsResult = false;
 
     //Don't perform actions if the operator is writen first
-    if(screen.textContent == "") {
+    if (screen.textContent == "") {
+        return;
+    }
+
+    //CHeck if there is already a stored operator and sbstitutes it to the new operator
+    if (storedOperator !== "") {
+        storedOperator = operator;
         return;
     }
 
@@ -170,7 +182,6 @@ function getResult() {
 
     showResult();
     displayValue = "";
-    storedOperator = "";
 
     //Lets the user start fresh after pressing the equal button
     storedIsResult = true;
