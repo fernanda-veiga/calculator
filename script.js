@@ -44,10 +44,8 @@ operators.forEach(function(button) {
             storedOperator = button.value;
         }
         else {
-            result = operate(storedNumber, Number(displayValue), storedOperator);
-            screen.textContent = result;
+            showResult();
             displayValue = "";
-            storedNumber = result;
             storedOperator = button.value;
         } 
     })
@@ -55,10 +53,8 @@ operators.forEach(function(button) {
 
 //Equal button
 equal.addEventListener("click", function() {
-    result = operate(storedNumber, Number(displayValue), storedOperator);
-    screen.textContent = result;
+    showResult();
     displayValue = "";
-    storedNumber = result;
     storedOperator = "";
 })
 
@@ -98,4 +94,12 @@ function operate(a, b, operator) {
             break;
     }
     return result;
+}
+
+//Equal
+function showResult() {
+    result = operate(storedNumber, Number(displayValue), storedOperator);
+    screen.textContent = result;
+    storedNumber = result;
+    return;
 }
