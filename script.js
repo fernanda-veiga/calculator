@@ -22,11 +22,11 @@ clear.addEventListener("click", backspace);
 
 //Number buttons
 numbers.forEach(button => 
-    button.addEventListener("click", () => writeDisplay(button)));
+    button.addEventListener("click", () => writeDisplay(button.value)));
 
 //Operator buttons
 operators.forEach(button => 
-    button.addEventListener("click", () => getOperator(button)));
+    button.addEventListener("click", () => getOperator(button.value)));
 
 //Equal button
 equal.addEventListener("click", getResult);
@@ -78,7 +78,7 @@ function operate(a, b, operator) {
 //Equal
 function showResult() {
     result = operate(storedNumber, Number(displayValue), storedOperator);
-    result = roundNumber(result);
+    
     screen.textContent = result;
 
     //Initializes the stored number if the result is an error
@@ -86,6 +86,7 @@ function showResult() {
         storedNumber = 0;
     }
     else {
+        result = roundNumber(result);
         storedNumber = result;
     }
     return;
@@ -113,7 +114,7 @@ function backspace() {
 }
 
 //Buttons
-function writeDisplay(button) {
+function writeDisplay(number) {
     //Deletes stored number if the user writes a number after clicking the equal button
     if (storedIsResult == true) {
         storedNumber = 0;
@@ -121,7 +122,7 @@ function writeDisplay(button) {
     }
 
     //Checks if there is already a dot on the number
-    if (button.value == ".") {
+    if (number == ".") {
         if (displayValue.search('\\.') !== -1) {
             return;
         }
@@ -134,21 +135,16 @@ function writeDisplay(button) {
     else {
         //Avoids zeros in the beginning of numbers
         if (displayValue == "0") {
-            displayValue = button.value;
+            displayValue = number;
         }
         else {
-            displayValue = displayValue + button.value;
+            displayValue = displayValue + number;
         }
         screen.textContent = displayValue;
     }
-
-    console.log(displayValue)
-    console.log(storedNumber)
-    console.log(storedOperator)
-    console.log(storedIsResult)
 }
 
-function getOperator(button) {
+function getOperator(operator) {
     console.log("here")
     //Uses the result if the user presses an operator after the equal button
     storedIsResult = false;
@@ -166,12 +162,7 @@ function getOperator(button) {
         showResult();
     }
     displayValue = "";
-    storedOperator = button.value;
-
-    console.log(displayValue)
-    console.log(storedNumber)
-    console.log(storedOperator)
-    console.log(storedIsResult)
+    storedOperator = operator;
 }
 
 function getResult() {
@@ -187,10 +178,49 @@ function getResult() {
     //Lets the user start fresh after pressing the equal button
     storedIsResult = true;
 
-    console.log(displayValue)
-    console.log(storedNumber)
-    console.log(storedOperator)
-    console.log(storedIsResult)
-
     return;
 }
+
+
+//KEYBOARD
+window.addEventListener("keydown", e => {
+    if (e.key.search(/[0-9]/) !== -1) {
+        writeDisplay(e.key);
+    }
+
+    if(e.key == ".") {
+        writeDisplay(e.key);
+    }
+
+    if(e.key == "=" || e.key == "Enter") {
+        getResult();
+    }
+
+    if(e.key == "Delete") {
+        deleteAll();
+    }
+
+    if(e.key == "Backspace") {
+        backspace();
+    }
+    
+    if (e.key.search(/[/*-+]/) !== -1) {
+        switch (e.key) {
+            case "+":
+                operator = "sum"
+                break;
+            case "-":
+                operator = "subtract"
+                break;
+            case "*":
+                operator = "multiply"
+                break;
+            case "/":
+                operator = "divide"
+                break;
+        }
+        getOperator(operator);
+    }
+    
+    console.log(e.key);
+});
