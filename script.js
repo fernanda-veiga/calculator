@@ -4,7 +4,7 @@ const btnAllClear = document.querySelector("#all-clear");
 const btnClear = document.querySelector("#clear");
 //Operators
 const operators = document.querySelectorAll(".operator");
-const btnEqual = document.querySelector("#equal");
+const equal = document.querySelector("#equal");
 //Numbers
 const numbers = document.querySelectorAll(".number");
 
@@ -34,6 +34,13 @@ operators.forEach(function(button) {
     })
 })
 
+equal.addEventListener("click", function() {
+    let result = operate(storedNumber, Number(displayValue), storedOperator);
+    screen.textContent = result;
+    console.log(result);
+    displayValue = "";
+})
+
 
 //FUNCTIONS
 //Basic Math operators 
@@ -59,13 +66,13 @@ function operate(a, b, operator) {
         case "sum":
             result = add(a, b);
             break;
-        case "subtraction":
+        case "subtract":
             result = subtract(a, b);
             break;
-        case "multiplication":
+        case "multiply":
             result = multiply(a, b);
             break;
-        case "division":
+        case "divide":
             result = divide(a, b);
             break;
     }
