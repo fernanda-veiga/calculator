@@ -1,7 +1,7 @@
 //BUTTONS
 //Delete
-const btnAllClear = document.querySelector("#all-clear");
-const btnClear = document.querySelector("#clear");
+const allClear = document.querySelector("#all-clear");
+const clear = document.querySelector("#clear");
 //Operators
 const operators = document.querySelectorAll(".operator");
 const equal = document.querySelector("#equal");
@@ -90,7 +90,13 @@ function multiply (a, b) {
 }
 
 function divide(a, b) {
-	return a / b;	
+    //Displays an error if the user tries to divide by 0
+    if (b == 0) {
+        return "ERROR";
+    }
+    else {
+        return a / b;
+    }	
 }
 
 //Operation
@@ -116,6 +122,13 @@ function operate(a, b, operator) {
 function showResult() {
     result = operate(storedNumber, Number(displayValue), storedOperator);
     screen.textContent = result;
-    storedNumber = result;
+
+    //Initializes the stored number if the result is an error
+    if (result == "ERROR") {
+        storedNumber = 0;
+    }
+    else {
+        storedNumber = result;
+    }
     return;
 }
