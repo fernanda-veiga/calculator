@@ -128,6 +128,9 @@ function operate(a, b, operator) {
 //Equal
 function showResult() {
     result = operate(storedNumber, Number(displayValue), storedOperator);
+
+    result = roundNumber(result);
+
     screen.textContent = result;
 
     //Initializes the stored number if the result is an error
@@ -140,6 +143,12 @@ function showResult() {
     return;
 }
 
+function roundNumber(number) {
+    number = (Math.round(number * Math.pow(10, 10)))/Math.pow(10, 10);
+    return number;
+}
+
+//Delete
 function deleteAll() {
     displayValue = "";
     storedNumber = 0;
