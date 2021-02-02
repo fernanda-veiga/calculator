@@ -10,12 +10,14 @@ const numbers = document.querySelectorAll(".number");
 
 //VARIABLES
 const screen = document.querySelector(".screen");
-let displayValue = "";
-let storedNumber = 0;
-let storedOperator = "";
-let storedIsResult = false;
+
+//Initializes all values
+deleteAll();
 
 //EVENT LISTENERS
+//All clear button
+allClear.addEventListener("click", deleteAll);
+
 //Number buttons
 numbers.forEach(function(button) {
     button.addEventListener("click", function(){
@@ -47,6 +49,11 @@ operators.forEach(function(button) {
     button.addEventListener("click", function() {
         //Uses the result if the user presses an operator after the equal button
         storedIsResult = false;
+
+        //Don't perform actions if the operator is writen first
+        if(displayValue == "") {
+            return;
+        }
 
         if (storedNumber == 0) {
             storedNumber = Number(displayValue);
@@ -130,5 +137,14 @@ function showResult() {
     else {
         storedNumber = result;
     }
+    return;
+}
+
+function deleteAll() {
+    displayValue = "";
+    storedNumber = 0;
+    storedOperator = "";
+    storedIsResult = false;
+    screen.textContent = displayValue;
     return;
 }
