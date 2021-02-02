@@ -81,7 +81,7 @@ function showResult() {
 
     //Initializes the stored number if the result is an error
     if (result == "ERROR") {
-        storedNumber = 0;
+        storedNumber = undefined;
     }
     else {
         if (result > 9999999999) {
@@ -106,7 +106,7 @@ function roundNumber(number) {
 //Delete
 function deleteAll() {
     displayValue = "";
-    storedNumber = 0;
+    storedNumber = undefined;
     storedOperator = "";
     storedIsResult = false;
     screen.textContent = displayValue;
@@ -123,7 +123,7 @@ function backspace() {
 function writeDisplay(number) {
     //Deletes stored number if the user writes a number after clicking the equal button
     if (storedIsResult == true) {
-        storedNumber = 0;
+        storedNumber = undefined;
         storedIsResult = false;
     }
 
@@ -142,6 +142,10 @@ function writeDisplay(number) {
         //Avoids zeros in the beginning of numbers
         if (displayValue == "0") {
             displayValue = number;
+        }
+        //Checks if the dot is the first number and puts a zero in front of it
+        else if (number == "." && displayValue == "") {
+            displayValue = "0."
         }
         else {
             displayValue = displayValue + number;
@@ -165,7 +169,7 @@ function getOperator(operator) {
         return;
     }
 
-    if (storedNumber == 0) {
+    if (storedNumber == undefined) {
         storedNumber = Number(displayValue);
     }
     else {
@@ -177,7 +181,7 @@ function getOperator(operator) {
 
 function getResult() {
     //Checks if all calculation variables exist before using the equal button
-    if(storedNumber == 0 || storedOperator == "" || displayValue == "") {
+    if(storedNumber == undefined || storedOperator == "" || displayValue == "") {
         return;
     }
 
