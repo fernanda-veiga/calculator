@@ -17,12 +17,12 @@ body {
 }
 
 .calculator {
+    height: 650px;
+    width: 400px;
     background: linear-gradient(
         to left bottom,
         rgba(255, 255, 255, 0.7),
         rgba(255, 255, 255, 0.3));
-    min-height: 80vh;
-    width: 50%;
     border-radius: 20px;
     padding: 20px;
     display: grid;
