@@ -1,4 +1,4 @@
-//BUTTONS
+//SELECTORS
 //Delete
 const allClear = document.querySelector("#all-clear");
 const clear = document.querySelector("#clear");
@@ -7,11 +7,10 @@ const operators = document.querySelectorAll(".operator");
 const equal = document.querySelector("#equal");
 //Numbers
 const numbers = document.querySelectorAll(".number");
-
-//VARIABLES
+//Screen
 const screen = document.querySelector(".screen");
 
-//Initializes all values
+//INITIALIZATION
 deleteAll();
 
 //EVENT LISTENERS
@@ -22,74 +21,15 @@ allClear.addEventListener("click", deleteAll);
 clear.addEventListener("click", backspace);
 
 //Number buttons
-numbers.forEach(function(button) {
-    button.addEventListener("click", function(){
-        //Deletes stored number if the user writes a number after clicking the equal button
-        if (storedIsResult == true) {
-            storedNumber = 0;
-            storedIsResult = false;
-        }
-
-        //Checks if there is already a dot on the number
-        if (button.value == ".") {
-            if (displayValue.search('\\.') !== -1) {
-                return;
-            }
-        }
-
-        //Avoids numbers overflowing the screen
-        if (displayValue.length >= 10) {
-            screen.textContent = displayValue;
-        }
-        else {
-            //Avoids zeros in the beginning of numbers
-            if (displayValue == "0") {
-                displayValue = button.value;
-            }
-            else {
-                displayValue = displayValue + button.value;
-            }
-            screen.textContent = displayValue;
-        }
-    });
-})
+numbers.forEach(button => 
+    button.addEventListener("click", () => writeDisplay(button)));
 
 //Operator buttons
-operators.forEach(function(button) {
-    button.addEventListener("click", function() {
-        //Uses the result if the user presses an operator after the equal button
-        storedIsResult = false;
-
-        //Don't perform actions if the operator is writen first
-        if(displayValue == "") {
-            return;
-        }
-
-        if (storedNumber == 0) {
-            storedNumber = Number(displayValue);
-        }
-        else {
-            showResult();
-        }
-        displayValue = "";
-        storedOperator = button.value;
-    })
-})
+operators.forEach(button => 
+    button.addEventListener("click", () => getOperator(button)));
 
 //Equal button
-equal.addEventListener("click", function() {
-    //Checks if all calculation variables exist before using the equal button
-    if(storedNumber == 0 || storedOperator == "" || displayValue == "") {
-        return;
-    }
-
-    showResult();
-    displayValue = "";
-    storedOperator = "";
-    //Lets the user start fresh after pressing the equal button
-    storedIsResult = true;
-    return;
-})
+equal.addEventListener("click", getResult);
 
 
 //FUNCTIONS
@@ -169,5 +109,88 @@ function deleteAll() {
 function backspace() {
     displayValue = displayValue.slice(0, -1);
     screen.textContent = displayValue;
+    return;
+}
+
+//Buttons
+function writeDisplay(button) {
+    //Deletes stored number if the user writes a number after clicking the equal button
+    if (storedIsResult == true) {
+        storedNumber = 0;
+        storedIsResult = false;
+    }
+
+    //Checks if there is already a dot on the number
+    if (button.value == ".") {
+        if (displayValue.search('\\.') !== -1) {
+            return;
+        }
+    }
+
+    //Avoids numbers overflowing the screen
+    if (displayValue.length >= 10) {
+        screen.textContent = displayValue;
+    }
+    else {
+        //Avoids zeros in the beginning of numbers
+        if (displayValue == "0") {
+            displayValue = button.value;
+        }
+        else {
+            displayValue = displayValue + button.value;
+        }
+        screen.textContent = displayValue;
+    }
+
+    console.log(displayValue)
+    console.log(storedNumber)
+    console.log(storedOperator)
+    console.log(storedIsResult)
+}
+
+function getOperator(button) {
+    console.log("here")
+    //Uses the result if the user presses an operator after the equal button
+    storedIsResult = false;
+    console.log(storedIsResult)
+
+    //Don't perform actions if the operator is writen first
+    if(screen.textContent == "") {
+        return;
+    }
+
+    if (storedNumber == 0) {
+        storedNumber = Number(displayValue);
+    }
+    else {
+        showResult();
+    }
+    displayValue = "";
+    storedOperator = button.value;
+
+    console.log(displayValue)
+    console.log(storedNumber)
+    console.log(storedOperator)
+    console.log(storedIsResult)
+}
+
+function getResult() {
+    //Checks if all calculation variables exist before using the equal button
+    if(storedNumber == 0 || storedOperator == "" || displayValue == "") {
+        return;
+    }
+
+    showResult();
+    displayValue = "";
+    storedOperator = "";
+
+    //Lets the user start fresh after pressing the equal button
+    storedIsResult = true;
+
+    console.log(displayValue)
+    console.log(storedNumber)
+    console.log(storedOperator)
+    console.log(storedIsResult)
+
     return;
 }
