@@ -78,8 +78,6 @@ function operate(a, b, operator) {
 //Equal
 function showResult() {
     result = operate(storedNumber, Number(displayValue), storedOperator);
-    
-    screen.textContent = result;
 
     //Initializes the stored number if the result is an error
     if (result == "ERROR") {
@@ -89,6 +87,7 @@ function showResult() {
         result = roundNumber(result);
         storedNumber = result;
     }
+    screen.textContent = result;
     return;
 }
 
@@ -145,10 +144,8 @@ function writeDisplay(number) {
 }
 
 function getOperator(operator) {
-    console.log("here")
     //Uses the result if the user presses an operator after the equal button
     storedIsResult = false;
-    console.log(storedIsResult)
 
     //Don't perform actions if the operator is writen first
     if(screen.textContent == "") {
