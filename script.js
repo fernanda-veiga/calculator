@@ -15,51 +15,44 @@ let storedNumber = 0;
 let storedOperator = "";
 
 //EVENT LISTENER
+//Number buttons
 numbers.forEach(function(button) {
     button.addEventListener("click", function(){
-        displayValue = displayValue + button.value;
-        console.log(displayValue);
+        if (displayValue == "0") {
+            displayValue = button.value;
+        }
+        else {
+            displayValue = displayValue + button.value;
+        }
         screen.textContent = displayValue;
     });
 })
 
+//Operator buttons
 operators.forEach(function(button) {
     button.addEventListener("click", function() {
         if (storedNumber == 0) {
-            console.log("if");
             storedNumber = Number(displayValue);
-            console.log(storedNumber);
             displayValue = "";
-            console.log(displayValue);
             storedOperator = button.value;
-            console.log(storedOperator);
         }
         else {
-            console.log("else");
-            
             result = operate(storedNumber, Number(displayValue), storedOperator);
-            console.log(result);
             screen.textContent = result;
             displayValue = "";
-            console.log(displayValue);
             storedNumber = result;
-            console.log(storedNumber);
             storedOperator = button.value;
-            console.log(storedOperator);
         } 
     })
 })
 
+//Equal button
 equal.addEventListener("click", function() {
     result = operate(storedNumber, Number(displayValue), storedOperator);
-    console.log(result);
     screen.textContent = result;
     displayValue = "";
-    console.log(displayValue);
     storedNumber = result;
-    console.log(storedNumber);
     storedOperator = "";
-    console.log(storedOperator);
 })
 
 
