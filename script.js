@@ -13,11 +13,18 @@ const screen = document.querySelector(".screen");
 let displayValue = "";
 let storedNumber = 0;
 let storedOperator = "";
+let storedIsResult = false;
 
-//EVENT LISTENER
+//EVENT LISTENERS
 //Number buttons
 numbers.forEach(function(button) {
     button.addEventListener("click", function(){
+        //Deletes stored number if the user writes a number after clicking the equal button
+        if (storedIsResult == true) {
+            storedNumber = 0;
+            storedIsResult = false;
+        }
+
         //Avoids numbers overflowing the screen
         if (displayValue.length >= 10) {
             screen.textContent = displayValue;
@@ -38,6 +45,9 @@ numbers.forEach(function(button) {
 //Operator buttons
 operators.forEach(function(button) {
     button.addEventListener("click", function() {
+        //Uses the result if the user presses an operator after the equal button
+        storedIsResult = false;
+
         if (storedNumber == 0) {
             storedNumber = Number(displayValue);
         }
@@ -45,7 +55,7 @@ operators.forEach(function(button) {
             showResult();
         }
         displayValue = "";
-        storedOperator = button.value; 
+        storedOperator = button.value;
     })
 })
 
@@ -59,6 +69,8 @@ equal.addEventListener("click", function() {
     showResult();
     displayValue = "";
     storedOperator = "";
+    //Lets the user start fresh after pressing the equal button
+    storedIsResult = true;
     return;
 })
 
