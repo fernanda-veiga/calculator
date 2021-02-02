@@ -4,35 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <title>Calculator</title>
 </head>
 <body>
-    <div id="calculator">
-        <div id="screen"></div>
-        <div id="numbers">
-            <button type="button" value="" class="button">AC</button>
-            <button type="button" value="" class="button"><i class="fas fa-backspace"></i></button>
-            <button type="button" value="" class="button"><i class="fas fa-divide"></i></button>
+    <div class="calculator">
+        <div class="screen">123456</div>
+        <div class="buttons-container">
+            <button id="all-clear" type="button" value="" class="button">AC</button>
+            <button id="clear" type="button" value="" class="button"><i class="fas fa-backspace"></i></button>
+            <button id="divide" type="button" value="" class="button"><i class="fas fa-divide"></i></button>
             <button type="button" value="" class="button">7</button>
             <button type="button" value="" class="button">8</button>
             <button type="button" value="" class="button">9</button>
-            <button type="button" value="" class="button">x</button>
+            <button id="multiply" type="button" value="" class="button"><i class="fas fa-times"></i></button>
             <button type="button" value="" class="button">4</button>
             <button type="button" value="" class="button">5</button>
             <button type="button" value="" class="button">6</button>
-            <button type="button" value="" class="button">-</button>
+            <button id="subtract" type="button" value="" class="button"><i class="fas fa-minus"></i></button>
             <button type="button" value="" class="button">1</button>
             <button type="button" value="" class="button">2</button>
             <button type="button" value="" class="button">3</button>
-            <button type="button" value="" class="button">+</button>
+            <button id="sum" type="button" value="" class="button"><i class="fas fa-plus"></i></button>
             <button type="button" value="" class="button">0</button>
             <button type="button" value="" class="button">.</button>
-            <button type="button" value="" class="button">=</button>
+            <button id="equal" type="button" value="" class="button"><i class="fas fa-equals"></i></button>
         </div>
-
     </div>
-    
 </body>
 <script src="./script.js"></script>
 </html>
