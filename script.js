@@ -85,7 +85,8 @@ function showResult() {
     }
     else {
         if (result > 9999999999) {
-            result = result.toExponential(2);
+            screen.textContent = result.toExponential(2);
+            return;
         }
         else {
             result = roundNumber(result);
@@ -229,6 +230,4 @@ window.addEventListener("keydown", e => {
         }
         getOperator(operator);
     }
-    
-    console.log(e.key);
 });
