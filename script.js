@@ -18,6 +18,9 @@ deleteAll();
 //All clear button
 allClear.addEventListener("click", deleteAll);
 
+//Backspace button
+clear.addEventListener("click", backspace);
+
 //Number buttons
 numbers.forEach(function(button) {
     button.addEventListener("click", function(){
@@ -26,20 +29,10 @@ numbers.forEach(function(button) {
             storedNumber = 0;
             storedIsResult = false;
         }
-        console.log("start")
-        console.log(displayValue)
-        console.log(storedNumber)
-        console.log(storedOperator)
-        console.log(storedIsResult)
 
         //Checks if there is already a dot on the number
         if (button.value == ".") {
             if (displayValue.search('\\.') !== -1) {
-                console.log("dot")
-                console.log(displayValue)
-                console.log(storedNumber)
-                console.log(storedOperator)
-                console.log(storedIsResult)
                 return;
             }
         }
@@ -169,6 +162,12 @@ function deleteAll() {
     storedNumber = 0;
     storedOperator = "";
     storedIsResult = false;
+    screen.textContent = displayValue;
+    return;
+}
+
+function backspace() {
+    displayValue = displayValue.slice(0, -1);
     screen.textContent = displayValue;
     return;
 }
