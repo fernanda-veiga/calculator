@@ -78,7 +78,6 @@ function operate(a, b, operator) {
 //Equal
 function showResult() {
     result = operate(storedNumber, Number(displayValue), storedOperator);
-    console.log(result);
     
     //Initializes the stored number if the result is an error
     if (result == "ERROR") {
@@ -112,6 +111,7 @@ function deleteAll() {
     storedNumber = undefined;
     storedOperator = "";
     storedIsResult = false;
+    lastIsOperator = false;
     auxOperator = "" 
     auxNumber = undefined;
     screen.textContent = displayValue;
@@ -159,10 +159,12 @@ function writeDisplay(number) {
             displayValue = displayValue + number;
         }
         screen.textContent = displayValue;
+        lastIsOperator = false;
     }
 }
 
 function getOperator(operator) {
+    console.log("hi")
     auxNumber = undefined;
     auxOperator = "";
     //Uses the result if the user presses an operator after the equal button
@@ -174,7 +176,7 @@ function getOperator(operator) {
     }
 
     //Check if there is already a stored operator and sbstitutes it to the new operator
-    if (storedOperator !== "") {
+    if (lastIsOperator == true) {
         storedOperator = operator;
         return;
     }
@@ -187,6 +189,7 @@ function getOperator(operator) {
     }
     displayValue = "";
     storedOperator = operator;
+    lastIsOperator = true;
 }
 
 function getResult() {
@@ -194,8 +197,6 @@ function getResult() {
     if (storedIsResult == true) {
         displayValue = auxNumber
         storedOperator = auxOperator;
-        console.log(displayValue);
-        console.log(auxOperator);
     }
 
     //Checks if all calculation variables exist before using the equal button
@@ -208,6 +209,7 @@ function getResult() {
 
     //Lets the user start fresh after pressing the equal button
     storedIsResult = true;
+    lastIsOperator = false;
 
     return;
 }
@@ -235,7 +237,7 @@ window.addEventListener("keydown", e => {
         backspace();
     }
     
-    if (e.key.search(/[/*-+]/) !== -1) {
+    if (e.key == "/" || e.key == "*" || e.key == "-" || e.key == "+") {
         switch (e.key) {
             case "+":
                 operator = "sum"
