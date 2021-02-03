@@ -78,7 +78,8 @@ function operate(a, b, operator) {
 //Equal
 function showResult() {
     result = operate(storedNumber, Number(displayValue), storedOperator);
-
+    console.log(result);
+    
     //Initializes the stored number if the result is an error
     if (result == "ERROR") {
         storedNumber = undefined;
@@ -93,6 +94,8 @@ function showResult() {
         }
         storedNumber = result;
     }
+    auxNumber = Number(displayValue);
+    auxOperator = storedOperator;
     screen.textContent = result;
     storedOperator = "";
     return;
@@ -109,6 +112,8 @@ function deleteAll() {
     storedNumber = undefined;
     storedOperator = "";
     storedIsResult = false;
+    auxOperator = "" 
+    auxNumber = undefined;
     screen.textContent = displayValue;
     return;
 }
@@ -121,6 +126,9 @@ function backspace() {
 
 //Buttons
 function writeDisplay(number) {
+    auxNumber = undefined;
+    auxOperator = "";
+
     //Deletes stored number if the user writes a number after clicking the equal button
     if (storedIsResult == true) {
         storedNumber = undefined;
@@ -155,6 +163,8 @@ function writeDisplay(number) {
 }
 
 function getOperator(operator) {
+    auxNumber = undefined;
+    auxOperator = "";
     //Uses the result if the user presses an operator after the equal button
     storedIsResult = false;
 
@@ -163,7 +173,7 @@ function getOperator(operator) {
         return;
     }
 
-    //CHeck if there is already a stored operator and sbstitutes it to the new operator
+    //Check if there is already a stored operator and sbstitutes it to the new operator
     if (storedOperator !== "") {
         storedOperator = operator;
         return;
@@ -180,6 +190,14 @@ function getOperator(operator) {
 }
 
 function getResult() {
+    //Checks if the equal button was pressed before
+    if (storedIsResult == true) {
+        displayValue = auxNumber
+        storedOperator = auxOperator;
+        console.log(displayValue);
+        console.log(auxOperator);
+    }
+
     //Checks if all calculation variables exist before using the equal button
     if(storedNumber == undefined || storedOperator == "" || displayValue == "") {
         return;
